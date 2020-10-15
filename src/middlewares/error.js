@@ -1,5 +1,7 @@
+const {errorLog, accessLog} = require('../common/logger');
+const createError = require('http-errors');
+
 module.exports = (err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('Error');
-  next();
+  errorLog.log('error', `${err.message()}\n${err.stack}`);
+  res.status(500).send();
 };

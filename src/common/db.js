@@ -79,10 +79,8 @@ const removeTask = (boardId, taskId) => {
 
 const updateUser = (id, user) => {
   let idx;
-  console.log('updateUser', id, user);
   if (-1 !== (idx = UsersDB.findIndex(el => el.id === id))) {
     UsersDB[idx] = new User(user);
-    console.log(user, UsersDB[idx]);
     return UsersDB[idx];
   }
   return false;
@@ -124,7 +122,4 @@ module.exports = {
   createTask,
   removeTask,
   updateTask,
-  UsersDB, // TODO: remove
-  BoardsDB,
-  TasksDB
 };

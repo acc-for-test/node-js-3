@@ -4,8 +4,9 @@ const usersService = require('./user.service');
 
 router
   .route('/')
-  .get(async (req, res) =>
-    res.json((await usersService.getAll()).map(User.toResponse))
+  .get(async (req, res) => {
+      return res.json((await usersService.getAll()).map(User.toResponse));
+    }
   )
   .post(async (req, res) => {
     const user = new User(req.body);

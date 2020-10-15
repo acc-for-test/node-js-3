@@ -6,6 +6,7 @@ const userRouter = require('./resources/users/user.router');
 const boardRouter = require('./resources/boards/board.router');
 const taskRouter = require('./resources/tasks/task.router');
 const errorHandler = require('./middlewares/error');
+const {errorLog, accessLog} = require('./common/logger');
 const home = require('./middlewares/home');
 
 const app = express();
@@ -17,15 +18,9 @@ app.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 app.use('/', home);
 app.use(errorHandler);
+app.use(accessLog);
 
 app.use('/users', userRouter);
-
-app.use('/dbg', (req, res) => {
-  // TODO: remove
-  const common = require('./common/db');
-  const result = [common.UsersDB, common.BoardsDB, common.TasksDB];
-  res.json(result);
-});
 
 app.use('/boards', boardRouter, taskRouter);
 
